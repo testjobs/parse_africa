@@ -23,7 +23,7 @@ class AfricaSpyder(scrapy.Spider):
     full_text = ''
     item = {}
 
-    #  It call for parsing the first page with magazines issued
+    #  It is called for parsing the first page with magazines issued
     def parse(self, response):
         logger.info('Start parsing')
         for link in response.css("th > a ::attr(href)").extract():
@@ -37,14 +37,14 @@ class AfricaSpyder(scrapy.Spider):
             logger.info('This magazine is send to download - {}'.format(next_page_journal))
             yield scrapy.Request(response.urljoin(next_page_journal), callback=self.parse_journal_page)
 
-    # It call for parsing page with one magazine
+    # It is called for parsing page with one magazine
     def parse_journal_page(self, response):
         for link in response.css("li > a ::attr(href)").extract():
             next_page_article = '{}{}'.format(self.base_url, link)
             logger.info('This article is send to download - {}'.format(next_page_article))
             yield scrapy.Request(response.urljoin(next_page_article), callback=self.parse_article_page)
 
-    # It call for parsing page with one article from magazine
+    # It is called for parsing page with one article from magazine
     def parse_article_page(self, response):
         # save data
         item = AfricaItem()
@@ -61,7 +61,7 @@ class AfricaSpyder(scrapy.Spider):
 
         yield request
 
-    # It call for download pdf and parsing full text article
+    # It is called for downloading pdf and parsing full text article
     def save_pdf(self, response):
         item = response.meta['item']
         full_text = ''
@@ -85,7 +85,7 @@ class AfricaSpyder(scrapy.Spider):
         # send in piplene
         yield item
 
-    # It check exist this issue in database
+    # It checks existing this issue in database
     def check_issue(self, link):
         connection = MongoClient(
             settings['MONGODB_SERVER'],

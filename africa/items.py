@@ -7,7 +7,7 @@
 
 import scrapy
 
-# Fields which will save in db
+# Fields which will be saved in db
 class AfricaItem(scrapy.Item):
     _id = scrapy.Field()
     Title = scrapy.Field()
