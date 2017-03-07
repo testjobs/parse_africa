@@ -21,6 +21,24 @@ NEWSPIDER_MODULE = 'africa.spiders'
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
 
+# Configure item pipelines
+# See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
+
+# ----------------------------------------------------------
+ITEM_PIPELINES = {'africa.pipelines.AfricaPipeline': 300}
+SPIDER_MODULES = ['africa.spiders']
+NEWSPIDER_MODULE = 'africa.spiders'
+
+#Avoid <urlopen error timed out>
+AWS_ACCESS_KEY_ID = ""
+AWS_SECRET_ACCESS_KEY = ""
+
+MONGODB_SERVER = 'mongodb://<db username>:<db password>@<public url>:27017'
+MONGODB_PORT = 27017
+MONGODB_DB = 'magazines'
+MONGODB_COLLECTION = 'magazines_collection'
+MONGODB_CACHE = 'magazines_issues'
+
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
 
@@ -62,11 +80,6 @@ ROBOTSTXT_OBEY = False
 #    'scrapy.extensions.telnet.TelnetConsole': None,
 #}
 
-# Configure item pipelines
-# See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
-ITEM_PIPELINES = {
-   'africa.pipelines.AfricaPipeline': 300,
-}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html
