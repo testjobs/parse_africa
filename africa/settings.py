@@ -33,7 +33,7 @@ NEWSPIDER_MODULE = 'africa.spiders'
 AWS_ACCESS_KEY_ID = ""
 AWS_SECRET_ACCESS_KEY = ""
 
-MONGODB_SERVER = 'mongodb://<db username>:<db password>@<public url>:27017'
+MONGODB_SERVER = 'localhost'
 MONGODB_PORT = 27017
 MONGODB_DB = 'magazines'
 MONGODB_COLLECTION = 'magazines_collection'

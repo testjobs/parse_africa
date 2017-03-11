@@ -16,14 +16,26 @@ logger = logging.getLogger(__name__)
 
 # Data come here after parsing
 class AfricaPipeline(object):
+
+    def __init__(self):
+        connection = MongoClient(
+            settings['MONGODB_SERVER'],
+            settings['MONGODB_PORT']
+        )
+        db = connection[settings['MONGODB_DB']]
+        self.collection = db[settings['MONGODB_COLLECTION']]
+
+        #clean up previous one before new crawling
+        self.collection.remove({})
+
     def process_item(self, item, spider):
         connection = MongoClient(
             settings['MONGODB_SERVER'],
             settings['MONGODB_PORT']
         )
         db = connection[settings['MONGODB_DB']]
-        collection = db[settings['MONGODB_COLLECTION']]
-        collection.insert(item)
+        self.collection = db[settings['MONGODB_COLLECTION']]
+        self.collection.insert(item)
         logger.info('Article saved - {}'.format(item['Title']))
         return item
 
