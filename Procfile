@@ -1,1 +1,1 @@
-web: scrapy crawl africa
+web: scrapyd
