@@ -28,5 +28,5 @@ six==1.10.0
 Twisted==17.1.0
 w3lib==1.17.0
 zope.interface==4.3.3
-scrapyd==1.1
+scrapyd==1.2.0a1
 scrapyd-heroku==0.1.0
