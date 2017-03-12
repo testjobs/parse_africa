@@ -65,24 +65,27 @@ class AfricaSpyder(scrapy.Spider):
     def save_pdf(self, response):
         item = response.meta['item']
         full_text = ''
+        # TODO
+        if 'pdf' in response.url:
+            # download pdf
+            path = '{}{}'.format(response.url.split('/')[-1].replace('?', '_'), '.pdf')
+            self.logger.info('Saving PDF %s', path)
+            with open(path, 'wb') as f:
+                f.write(response.body)
 
-        # download pdf
-        path = '{}{}'.format(response.url.split('/')[-1].replace('?', '_'), '.pdf')
-        self.logger.info('Saving PDF %s', path)
-        with open(path, 'wb') as f:
-            f.write(response.body)
-
-        # parsing pdf
-        with open(path, 'rb') as pdf_file:
-            read_pdf = PyPDF2.PdfFileReader(pdf_file)
-            number_of_pages = read_pdf.getNumPages()
-            for page in range(number_of_pages):
-                full_text += read_pdf.getPage(page).extractText()
-        os.remove(path)
+            # parsing pdf
+            with open(path, 'rb') as pdf_file:
+                read_pdf = PyPDF2.PdfFileReader(pdf_file)
+                number_of_pages = read_pdf.getNumPages()
+                for page in range(number_of_pages):
+                    full_text += read_pdf.getPage(page).extractText()
+            os.remove(path)
+        else:
+            full_text = 'todo'
 
         item["Full_text"] = full_text
 
-        # send in piplene
+        # send in pipeline
         yield item
 
     # It checks existing this issue in database
