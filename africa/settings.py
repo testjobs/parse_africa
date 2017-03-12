@@ -33,9 +33,11 @@ NEWSPIDER_MODULE = 'africa.spiders'
 AWS_ACCESS_KEY_ID = ""
 AWS_SECRET_ACCESS_KEY = ""
 
-MONGODB_SERVER = 'localhost'
-MONGODB_PORT = 27017
-MONGODB_DB = 'magazines'
+MONGODB_SERVER = 'ds129050.mlab.com'
+MONGODB_PORT = 29050
+MONGODB_DB = 'testsjobs'
+MONGODB_USER = 'testsjobs'
+MONGODB_PASS = 'testsjobs'
 MONGODB_COLLECTION = 'magazines_collection'
 MONGODB_CACHE = 'magazines_issues'
 

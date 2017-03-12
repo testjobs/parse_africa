@@ -18,22 +18,19 @@ logger = logging.getLogger(__name__)
 class AfricaPipeline(object):
 
     def __init__(self):
-        connection = MongoClient(
-            settings['MONGODB_SERVER'],
-            settings['MONGODB_PORT']
-        )
+        connection = MongoClient(settings['MONGODB_SERVER'], settings['MONGODB_PORT'])
         db = connection[settings['MONGODB_DB']]
+        db.authenticate(settings['MONGODB_USER'], settings['MONGODB_PASS'])
         self.collection = db[settings['MONGODB_COLLECTION']]
 
         #clean up previous one before new crawling
         self.collection.remove({})
+        # pass
 
     def process_item(self, item, spider):
-        connection = MongoClient(
-            settings['MONGODB_SERVER'],
-            settings['MONGODB_PORT']
-        )
+        connection = MongoClient(settings['MONGODB_SERVER'], settings['MONGODB_PORT'])
         db = connection[settings['MONGODB_DB']]
+        db.authenticate(settings['MONGODB_USER'], settings['MONGODB_PASS'])
         self.collection = db[settings['MONGODB_COLLECTION']]
         self.collection.insert(item)
         logger.info('Article saved - {}'.format(item['Title']))

@@ -87,11 +87,10 @@ class AfricaSpyder(scrapy.Spider):
 
     # It checks existing this issue in database
     def check_issue(self, link):
-        connection = MongoClient(
-            settings['MONGODB_SERVER'],
-            settings['MONGODB_PORT']
-        )
+
+        connection = MongoClient(settings['MONGODB_SERVER'], settings['MONGODB_PORT'])
         db = connection[settings['MONGODB_DB']]
+        db.authenticate(settings['MONGODB_USER'], settings['MONGODB_PASS'])
         collection = db[settings['MONGODB_CACHE']]
 
         if collection.find_one({'issue': link}) is None:
