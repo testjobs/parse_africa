@@ -29,4 +29,4 @@ Twisted==17.1.0
 w3lib==1.17.0
 zope.interface==4.3.3
 scrapyd==1.1
-scrapy-heroku==0.7.1
+scrapyd-heroku==0.1.0
