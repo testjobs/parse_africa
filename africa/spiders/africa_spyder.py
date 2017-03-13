@@ -65,7 +65,7 @@ class AfricaSpyder(scrapy.Spider):
     def save_pdf(self, response):
         item = response.meta['item']
         full_text = ''
-        # TODO
+
         if 'pdf' in response.url:
             # download pdf
             path = '{}{}'.format(response.url.split('/')[-1].replace('?', '_'), '.pdf')
@@ -81,7 +81,7 @@ class AfricaSpyder(scrapy.Spider):
                     full_text += read_pdf.getPage(page).extractText()
             os.remove(path)
         else:
-            full_text = 'todo'
+            full_text = ''.join(response.xpath('//table[@class="miolo"]').extract())
 
         item["Full_text"] = full_text
 
